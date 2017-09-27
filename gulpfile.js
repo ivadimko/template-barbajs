@@ -22,7 +22,7 @@ gulp.task('html', function () {
 gulp.task('js', function() {
 	return gulp.src([
 //-----------------------Include libraries-------------------------
-		'./dev/assets/scripts/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
+		'./dev/assets/scripts/libs/barbajs/barba.min.js',
 //-----------------------------------------------------------------
 		])
 	.pipe(concat('scripts.min.js'))
