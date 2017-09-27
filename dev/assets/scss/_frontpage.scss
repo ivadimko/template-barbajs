@@ -5,18 +5,17 @@ font-size: 0;
 	height: 100vh;
 	width: 100vw;
 	overflow: auto;
-	overflow-Y: hidden;
 	white-space: nowrap;
 	&__item{
 		display: inline-block;
 		position: relative;
 		height: 100vh;
-		width: 33.33%;
+		width: calc(100vw/3);
 		overflow: hidden;
 		
 		&:hover{
 			.content__title{
-				color: #ccc;
+				color: gold;
 			}
 			
 		}
@@ -55,7 +54,9 @@ font-size: 0;
 }
 }
 .page__content{
-	
+	height: 100vh;
+	width: 100vw;
+	overflow: auto;
 }
 .cloned{
 	position: absolute;
@@ -71,4 +72,7 @@ font-size: 0;
 		background-size: cover;
 		background-repeat: no-repeat;
 		transform: translate(-30%,0);
+}
+.mCSB_inside>.mCSB_container{
+	margin-right: 0;
 }

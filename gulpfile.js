@@ -23,6 +23,7 @@ gulp.task('js', function() {
 	return gulp.src([
 //-----------------------Include libraries-------------------------
 		'./dev/assets/scripts/libs/barbajs/barba.min.js',
+		'./dev/assets/scripts/libs/custom-scrollbar/jquery.mCustomScrollbar.js',
 //-----------------------------------------------------------------
 		])
 	.pipe(concat('scripts.min.js'))

@@ -1,10 +1,17 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 Barba.Pjax.start();
-
+$(".page__content").mCustomScrollbar({
+	axis:"y",
+}); 
+$(".content").mCustomScrollbar({
+	axis:"x",
+	autoHideScrollbar: true,
+}); 
 var lastClicked;
 
 Barba.Dispatcher.on('linkClicked', function(el){
 	lastClicked = el;
+
 });
 
 var ExpandTransition = Barba.BaseTransition.extend({
@@ -60,14 +67,17 @@ var ExpandTransition = Barba.BaseTransition.extend({
     		}
     	}
     	},0,0);
-    tl.to(bg, 1, {x:0}, 0);
-    }
     
+    }
+    tl.to(bg, 1, {x:0}, 0);
     
     return deferred.promise;
   },
 
   showNewPage: function() {
+  	$(".page__content").mCustomScrollbar({
+	axis:"y",
+}); 
     this.done();
   }
 });
@@ -88,39 +98,33 @@ var BackTransition = Barba.BaseTransition.extend({
     
 
     let prev = $(lastClicked).prev();
+    console.log(prev);
 
     cloned.classList.add('cloned');
-    cloned.innerHTML = 'Going back';
+    cloned.innerHTML = 'Going back...';
     this.oldContainer.appendChild(cloned);
     tl.set(cloned,{x:left});
     let screenWidth = $(window).width();
-    let bg = $(cloned).find('.item__bg');
 
     tl.to(cloned, 1, {x:0, width: screenWidth, onComplete: function() {
     	deferred.resolve();
+
     }}, 0);
 
-    if (prevAll.length) {
-    	
-    	let prevAllLeft = prevAll[0].getBoundingClientRect().left;
-    tl.to(prevAll,1,{
-    	x: -(screenWidth/3 + prevAllLeft)
+    tl.to(prev,1,{
+    	x: -(200)
     	    },0);
-    }
-    if (nextAll.length) {
-    	let nextAllLeft = nextAll[0].getBoundingClientRect().left;
-    tl.to(nextAll,1,{
-    	x: nextAllLeft-screenWidth/3
-    	    },0);
-    }
-    
-    tl.to(bg, 1, {x:0}, 0);
+    $(lastClicked).fadeOut();
     
     return deferred.promise;
   },
 
   showNewPage: function() {
     this.done();
+    	$(".content").mCustomScrollbar({
+			axis:"x"
+		}); 
+  
   }
 });
 
@@ -129,7 +133,10 @@ Barba.Pjax.getTransition = function() {
 
   if (Barba.HistoryManager.prevStatus().namespace === 'Single'){
   	transitionObj = BackTransition;
-  } 
+  }
+  $(".barba-container").mCustomScrollbar({
+			axis:"x"
+		}); 
   return transitionObj;
 };
 
